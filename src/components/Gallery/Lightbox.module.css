@@ -103,9 +103,30 @@
   line-height: 1.8;
 }
 
+@media (max-width: 768px) {
+  .content {
+    max-height: 85vh;
+    border-radius: 8px;
+  }
+
+  .info {
+    padding: 20px;
+  }
+
+  .description {
+    font-size: 13px;
+  }
+}
+
 @media (max-width: 480px) {
   .overlay {
-    padding: 12px;
+    padding: 8px;
+    align-items: flex-end;
+  }
+
+  .content {
+    max-height: 90vh;
+    border-radius: 12px 12px 0 0;
   }
 
   .info {
@@ -113,6 +134,16 @@
   }
 
   .title {
-    font-size: 18px;
+    font-size: 17px;
+  }
+
+  .category {
+    font-size: 11px;
+    padding: 3px 10px;
+  }
+
+  .description {
+    font-size: 13px;
+    line-height: 1.7;
   }
 }

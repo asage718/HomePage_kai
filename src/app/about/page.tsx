@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import styles from './page.module.css';
 
 export const metadata: Metadata = {
-  title: 'About | Portfolio',
+  title: 'About | aoimachi',
   description: 'イラストレーターのプロフィール・経歴を紹介しています。',
 };
 
@@ -23,7 +23,7 @@ export default function AboutPage() {
           </div>
 
           <div className={styles.bio}>
-            <h2 className={styles.name}>イラストレーター名</h2>
+            <h2 className={styles.name}>aoimachi</h2>
             <p className={styles.role}>Illustrator / Character Designer</p>
 
             <div className={styles.text}>

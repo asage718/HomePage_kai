@@ -1,0 +1,148 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  max-width: 480px;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+
+.slideshow {
+  position: relative;
+  flex: 1;
+  aspect-ratio: 4 / 5;
+  border-radius: 16px;
+  overflow: hidden;
+  background-color: var(--color-bg-secondary);
+}
+
+.track {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  z-index: 0;
+}
+
+.prev {
+  opacity: 1;
+  z-index: 1;
+}
+
+.active {
+  opacity: 1;
+  z-index: 2;
+  transition: opacity 0.8s ease;
+}
+
+.image {
+  object-fit: cover;
+}
+
+/* Arrows */
+.arrow {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid var(--color-border);
+  background-color: var(--color-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-light);
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.arrow:hover {
+  color: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+.arrow svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* Dots */
+.dots {
+  display: flex;
+  gap: 10px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--color-border);
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.dotActive {
+  background-color: var(--color-accent);
+  transform: scale(1.25);
+}
+
+@media (max-width: 768px) {
+  .wrapper {
+    max-width: 380px;
+    gap: 12px;
+  }
+
+  .slideshow {
+    aspect-ratio: 1;
+    border-radius: 12px;
+  }
+
+  .arrow {
+    width: 32px;
+    height: 32px;
+  }
+
+  .arrow svg {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .wrapper {
+    max-width: 100%;
+    gap: 10px;
+  }
+
+  .row {
+    gap: 8px;
+  }
+
+  .arrow {
+    width: 28px;
+    height: 28px;
+  }
+
+  .arrow svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .dots {
+    gap: 8px;
+  }
+
+  .dot {
+    width: 7px;
+    height: 7px;
+  }
+}

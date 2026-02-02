@@ -109,3 +109,48 @@
   color: var(--color-text-light);
   line-height: 1.8;
 }
+
+@media (max-width: 768px) {
+  .form {
+    gap: 20px;
+  }
+
+  .input,
+  .textarea {
+    padding: 10px 14px;
+    font-size: 16px; /* Prevents iOS zoom on focus */
+  }
+
+  .select {
+    font-size: 16px;
+  }
+
+  .submit {
+    width: 100%;
+    text-align: center;
+    align-self: stretch;
+  }
+}
+
+@media (max-width: 480px) {
+  .form {
+    gap: 16px;
+  }
+
+  .submit {
+    padding: 12px 24px;
+    font-size: 14px;
+  }
+
+  .success {
+    padding: 40px 16px;
+  }
+
+  .successTitle {
+    font-size: 18px;
+  }
+
+  .successText {
+    font-size: 13px;
+  }
+}

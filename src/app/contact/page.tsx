@@ -3,7 +3,7 @@ import ContactForm from '@/components/ContactForm/ContactForm';
 import styles from './page.module.css';
 
 export const metadata: Metadata = {
-  title: 'Contact | Portfolio',
+  title: 'Contact | aoimachi',
   description: 'お仕事のご依頼・ご相談はこちらからお問い合わせください。',
 };
 

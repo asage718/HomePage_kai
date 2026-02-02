@@ -97,4 +97,14 @@ select {
     --header-height: 60px;
     --section-padding: 48px;
   }
+
+  .container {
+    padding: 0 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --section-padding: 36px;
+  }
 }

@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import SnsLinks from '@/components/SnsLinks/SnsLinks';
+import HeroSlideshow from '@/components/HeroSlideshow/HeroSlideshow';
 import { works } from '@/data/works';
 import styles from './page.module.css';
 
@@ -14,11 +15,10 @@ export default function HomePage() {
         <div className={styles.heroInner}>
           <div className={styles.heroText}>
             <h1 className={styles.heroTitle}>
-              Illustration<br />
-              <span className={styles.heroTitleAccent}>&amp; Design</span>
+              aoimachi
             </h1>
             <p className={styles.heroDescription}>
-              イラスト・キャラクターデザイン・漫画制作を手がけるイラストレーターのポートフォリオサイトです。
+              イラスト・キャラクターデザイン・漫画制作を手がけるaoimachiのポートフォリオサイトです。
             </p>
             <div className={styles.heroActions}>
               <Link href="/works" className={styles.heroBtn}>
@@ -33,9 +33,7 @@ export default function HomePage() {
             </div>
           </div>
           <div className={styles.heroVisual}>
-            <div className={styles.heroImagePlaceholder}>
-              <span>Main Visual</span>
-            </div>
+            <HeroSlideshow />
           </div>
         </div>
       </section>

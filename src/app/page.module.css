@@ -103,18 +103,6 @@
   animation: fadeInUp 0.8s ease-out 0.2s both;
 }
 
-.heroImagePlaceholder {
-  width: 100%;
-  aspect-ratio: 4 / 5;
-  max-width: 420px;
-  background-color: var(--color-bg-secondary);
-  border-radius: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--color-text-muted);
-  font-size: 14px;
-}
 
 /* Works Section */
 .worksSection {
@@ -226,43 +214,81 @@
   .heroInner {
     grid-template-columns: 1fr;
     gap: 40px;
-    padding-top: 40px;
-    padding-bottom: 40px;
+    padding: 40px 16px;
   }
 
   .heroTitle {
     font-size: 40px;
   }
 
+  .heroDescription {
+    font-size: 14px;
+    max-width: 100%;
+  }
+
   .heroVisual {
     order: -1;
   }
 
-  .heroImagePlaceholder {
-    max-width: 320px;
-    aspect-ratio: 1;
+  .container {
+    padding: 0 16px;
+  }
+
+  .sectionHeader {
+    margin-bottom: 32px;
   }
 
   .sectionTitle {
     font-size: 26px;
   }
+
+  .viewAll {
+    margin-top: 32px;
+  }
 }
 
 @media (max-width: 480px) {
-  .heroTitle {
-    font-size: 32px;
+  .hero {
+    min-height: auto;
+    padding: 24px 0;
   }
 
-  .worksGrid {
-    grid-template-columns: 1fr;
+  .heroInner {
+    gap: 28px;
+    padding: 24px 16px;
+  }
+
+  .heroTitle {
+    font-size: 28px;
+    margin-bottom: 12px;
+  }
+
+  .heroDescription {
+    font-size: 13px;
+    margin-bottom: 24px;
   }
 
   .heroActions {
     flex-direction: column;
+    margin-bottom: 24px;
   }
 
   .heroBtn,
   .heroBtnOutline {
     justify-content: center;
+    padding: 10px 20px;
+  }
+
+  .worksGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .sectionTitle {
+    font-size: 22px;
+  }
+
+  .workTitle {
+    font-size: 13px;
   }
 }

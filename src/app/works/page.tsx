@@ -4,7 +4,7 @@ import { works } from '@/data/works';
 import styles from './page.module.css';
 
 export const metadata: Metadata = {
-  title: 'Works | Portfolio',
+  title: 'Works | aoimachi',
   description: '作品一覧ページです。イラスト・キャラクターデザイン・漫画・ロゴなどの作品を掲載しています。',
 };
 

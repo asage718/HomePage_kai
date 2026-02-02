@@ -44,8 +44,14 @@ export default function Header() {
     <header className={`${styles.header} ${scrolled ? styles.scrolled : ''}`}>
       <div className={styles.inner}>
         <Link href="/" className={styles.logo}>
-          Portfolio
+          aoimachi
         </Link>
+        {menuOpen && (
+          <div
+            className={styles.overlay}
+            onClick={() => setMenuOpen(false)}
+          />
+        )}
         <nav className={`${styles.nav} ${menuOpen ? styles.navOpen : ''}`}>
           <ul className={styles.navList}>
             {navItems.map((item) => (

@@ -90,9 +90,50 @@
   }
 }
 
+@media (max-width: 768px) {
+  .filter {
+    gap: 6px;
+    margin-bottom: 28px;
+  }
+
+  .filterBtn {
+    padding: 6px 14px;
+    font-size: 13px;
+  }
+
+  .grid {
+    gap: 16px;
+  }
+
+  .info {
+    padding: 12px 2px;
+  }
+
+  .title {
+    font-size: 14px;
+  }
+}
+
 @media (max-width: 480px) {
   .grid {
-    grid-template-columns: 1fr;
-    gap: 20px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .filterBtn {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+
+  .info {
+    padding: 8px 2px;
+  }
+
+  .title {
+    font-size: 13px;
+  }
+
+  .category {
+    font-size: 11px;
   }
 }

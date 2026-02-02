@@ -4,8 +4,8 @@ import Footer from '@/components/Footer/Footer';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'Portfolio | イラストレーター',
-  description: 'イラストレーターのポートフォリオサイトです。イラスト・キャラクターデザイン・漫画などの作品を掲載しています。',
+  title: 'aoimachi | Portfolio',
+  description: 'aoimachiのポートフォリオサイトです。イラスト・キャラクターデザイン・漫画などの作品を掲載しています。',
 };
 
 export default function RootLayout({

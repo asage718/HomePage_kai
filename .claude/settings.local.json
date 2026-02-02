@@ -8,7 +8,15 @@
       "Bash(git add:*)",
       "Bash(git commit -m \"$\\(cat <<''EOF''\nInitial commit: illustrator portfolio site\n\nNext.js 14 \\(App Router\\) + TypeScript + CSS Modules\n- Home: hero section, works highlight, SNS links\n- Works: gallery grid with category filter and lightbox\n- About: profile and career timeline\n- Contact: form with frontend validation\n- Responsive design with mobile hamburger menu\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
       "Bash(git push:*)",
-      "Bash(gh auth status:*)"
+      "Bash(gh auth status:*)",
+      "Bash(npm run build:*)",
+      "Bash(netstat:*)",
+      "Bash(findstr:*)",
+      "Bash(ss:*)",
+      "Bash(taskkill //F //PID 15516)",
+      "Bash(taskkill //F //PID 10964)",
+      "Bash(taskkill //F //PID 5828)",
+      "Bash(taskkill:*)"
     ]
   }
 }

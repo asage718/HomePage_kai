@@ -32,3 +32,29 @@
   line-height: 1.9;
   margin-bottom: 48px;
 }
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 16px;
+  }
+
+  .title {
+    font-size: 28px;
+  }
+
+  .description {
+    font-size: 13px;
+    margin-bottom: 36px;
+  }
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: 24px;
+  }
+
+  .description {
+    text-align: left;
+    margin-bottom: 28px;
+  }
+}

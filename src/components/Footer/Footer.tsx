@@ -7,7 +7,7 @@ export default function Footer() {
       <div className={styles.inner}>
         <SnsLinks size="small" />
         <p className={styles.copyright}>
-          &copy; {new Date().getFullYear()} Portfolio. All rights reserved.
+          &copy; {new Date().getFullYear()} aoimachi. All rights reserved.
         </p>
       </div>
     </footer>

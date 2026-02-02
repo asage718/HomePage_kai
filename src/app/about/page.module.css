@@ -112,6 +112,18 @@
 }
 
 @media (max-width: 768px) {
+  .container {
+    padding: 0 16px;
+  }
+
+  .header {
+    margin-bottom: 40px;
+  }
+
+  .title {
+    font-size: 28px;
+  }
+
   .content {
     grid-template-columns: 1fr;
     gap: 40px;
@@ -125,9 +137,50 @@
 
   .name {
     text-align: center;
+    font-size: 22px;
   }
 
   .role {
     text-align: center;
+  }
+
+  .text {
+    margin-bottom: 36px;
+  }
+
+  .careerTitle {
+    font-size: 16px;
+    margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: 24px;
+  }
+
+  .profileImage {
+    max-width: 200px;
+  }
+
+  .name {
+    font-size: 20px;
+  }
+
+  .text p {
+    font-size: 14px;
+  }
+
+  .careerItem {
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .careerYear {
+    width: auto;
+  }
+
+  .careerText {
+    font-size: 13px;
   }
 }
