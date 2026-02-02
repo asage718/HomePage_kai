@@ -1,0 +1,133 @@
+.section {
+  padding: var(--section-padding) 0;
+}
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.title {
+  font-family: var(--font-en);
+  font-size: 36px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  font-size: 14px;
+  color: var(--color-text-muted);
+}
+
+.content {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 60px;
+  align-items: start;
+}
+
+.profileImage {
+  position: sticky;
+  top: calc(var(--header-height) + 24px);
+}
+
+.imagePlaceholder {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  background-color: var(--color-bg-secondary);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-muted);
+  font-size: 14px;
+}
+
+.name {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.role {
+  font-family: var(--font-en);
+  font-size: 14px;
+  color: var(--color-text-muted);
+  margin-bottom: 32px;
+}
+
+.text {
+  margin-bottom: 48px;
+}
+
+.text p {
+  font-size: 15px;
+  color: var(--color-text-light);
+  line-height: 2;
+  margin-bottom: 16px;
+}
+
+.text p:last-child {
+  margin-bottom: 0;
+}
+
+.careerTitle {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 24px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.careerList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.careerItem {
+  display: flex;
+  align-items: baseline;
+  gap: 20px;
+}
+
+.careerYear {
+  font-family: var(--font-en);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-accent);
+  flex-shrink: 0;
+  width: 48px;
+}
+
+.careerText {
+  font-size: 14px;
+  color: var(--color-text-light);
+}
+
+@media (max-width: 768px) {
+  .content {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .profileImage {
+    position: static;
+    max-width: 240px;
+    margin: 0 auto;
+  }
+
+  .name {
+    text-align: center;
+  }
+
+  .role {
+    text-align: center;
+  }
+}
