@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(dir:*)",
+      "Bash(npx create-next-app@14:*)",
+      "Bash(npm run dev:*)",
+      "Bash(git remote add:*)",
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$\\(cat <<''EOF''\nInitial commit: illustrator portfolio site\n\nNext.js 14 \\(App Router\\) + TypeScript + CSS Modules\n- Home: hero section, works highlight, SNS links\n- Works: gallery grid with category filter and lightbox\n- About: profile and career timeline\n- Contact: form with frontend validation\n- Responsive design with mobile hamburger menu\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(git push:*)",
+      "Bash(gh auth status:*)"
+    ]
+  }
+}
