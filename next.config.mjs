@@ -5,6 +5,16 @@ const nextConfig = {
     deviceSizes: [640, 768, 1024, 1280],
     imageSizes: [48, 96, 128, 256, 384],
     minimumCacheTTL: 60 * 60 * 24 * 30,
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**.r2.dev',
+      },
+      {
+        protocol: 'https',
+        hostname: '**.cloudflarestorage.com',
+      },
+    ],
   },
 };
 
