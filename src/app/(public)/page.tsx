@@ -2,14 +2,21 @@ import Link from 'next/link';
 import Image from 'next/image';
 import SnsLinks from '@/components/SnsLinks/SnsLinks';
 import HeroSlideshow from '@/components/HeroSlideshow/HeroSlideshow';
-import { getWorks } from '@/lib/data';
-import { getSlideshow } from '@/lib/data';
+import { getWorks, getSlideshow } from '@/lib/data';
 import styles from './page.module.css';
 
 export const dynamic = 'force-dynamic';
 
 export default async function HomePage() {
-  const [works, slides] = await Promise.all([getWorks(), getSlideshow()]);
+  let works: Awaited<ReturnType<typeof getWorks>> = [];
+  let slides: Awaited<ReturnType<typeof getSlideshow>> = [];
+
+  try {
+    [works, slides] = await Promise.all([getWorks(), getSlideshow()]);
+  } catch (error) {
+    console.error('Failed to fetch data:', error);
+  }
+
   const highlightWorks = works.slice(0, 4);
 
   return (
