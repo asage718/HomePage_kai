@@ -37,6 +37,14 @@
   top: calc(var(--header-height) + 24px);
 }
 
+.image {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
 .imagePlaceholder {
   width: 100%;
   aspect-ratio: 3 / 4;

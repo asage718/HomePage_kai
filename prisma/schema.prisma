@@ -48,3 +48,19 @@ model Contact {
   status    String   @default("unread")
   createdAt DateTime @default(now())
 }
+
+model Profile {
+  id        Int      @id @default(autoincrement())
+  name      String
+  role      String
+  bio       String   @db.Text
+  image     String?
+  updatedAt DateTime @updatedAt
+}
+
+model Career {
+  id        Int      @id @default(autoincrement())
+  year      String
+  text      String
+  position  Int
+}

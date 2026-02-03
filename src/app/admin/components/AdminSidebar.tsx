@@ -8,6 +8,7 @@ import styles from './AdminSidebar.module.css';
 const navItems = [
   { href: '/admin/works', label: '作品管理', icon: '🖼' },
   { href: '/admin/slideshow', label: 'スライドショー', icon: '📽' },
+  { href: '/admin/profile', label: 'プロフィール', icon: '📝' },
   { href: '/admin/contacts', label: 'お問い合わせ', icon: '✉' },
   { href: '/admin/accounts', label: 'アカウント', icon: '👤' },
 ];
