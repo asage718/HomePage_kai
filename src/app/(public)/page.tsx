@@ -6,6 +6,8 @@ import { getWorks } from '@/lib/data';
 import { getSlideshow } from '@/lib/data';
 import styles from './page.module.css';
 
+export const dynamic = 'force-dynamic';
+
 export default async function HomePage() {
   const [works, slides] = await Promise.all([getWorks(), getSlideshow()]);
   const highlightWorks = works.slice(0, 4);

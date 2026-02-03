@@ -3,6 +3,8 @@ import Gallery from '@/components/Gallery/Gallery';
 import { getWorks } from '@/lib/data';
 import styles from './page.module.css';
 
+export const dynamic = 'force-dynamic';
+
 export const metadata: Metadata = {
   title: 'Works | aoimachi',
   description: '作品一覧ページです。イラスト・キャラクターデザイン・漫画・ロゴなどの作品を掲載しています。',
