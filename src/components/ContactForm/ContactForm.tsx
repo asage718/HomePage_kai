@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, FormEvent } from 'react';
+import Link from 'next/link';
 import styles from './ContactForm.module.css';
 
 interface FormData {
@@ -107,6 +108,16 @@ export default function ContactForm() {
           お問い合わせいただきありがとうございます。<br />
           内容を確認の上、折り返しご連絡いたします。
         </p>
+        <div className={styles.worksLink}>
+          <p className={styles.worksLinkText}>作品をご覧になりたい方はこちら</p>
+          <Link href="/works" className={styles.worksLinkButton}>
+            作品一覧を見る
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={styles.arrow}>
+              <line x1="5" y1="12" x2="19" y2="12" />
+              <polyline points="12 5 19 12 12 19" />
+            </svg>
+          </Link>
+        </div>
       </div>
     );
   }
