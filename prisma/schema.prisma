@@ -44,6 +44,6 @@ model Contact {
   email     String
   subject   String
   message   String   @db.Text
-  read      Boolean  @default(false)
+  status    String   @default("unread")
   createdAt DateTime @default(now())
 }

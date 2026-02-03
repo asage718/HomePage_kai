@@ -72,6 +72,14 @@
   text-align: center;
 }
 
+.unreadDot {
+  width: 8px;
+  height: 8px;
+  background-color: #ef4444;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
 @media (max-width: 768px) {
   .sidebar {
     width: 60px;
@@ -91,9 +99,18 @@
     justify-content: center;
     padding: 10px 8px;
     font-size: 0;
+    position: relative;
   }
 
   .icon {
     font-size: 20px;
+  }
+
+  .unreadDot {
+    position: absolute;
+    top: 6px;
+    right: 10px;
+    width: 8px;
+    height: 8px;
   }
 }

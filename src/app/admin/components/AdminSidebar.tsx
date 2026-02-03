@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useEffect, useState } from 'react';
 import styles from './AdminSidebar.module.css';
 
 const navItems = [
@@ -13,6 +14,25 @@ const navItems = [
 
 export default function AdminSidebar() {
   const pathname = usePathname();
+  const [unreadCount, setUnreadCount] = useState(0);
+
+  useEffect(() => {
+    const fetchUnreadCount = async () => {
+      try {
+        const res = await fetch('/api/contacts/unread-count');
+        if (res.ok) {
+          const data = await res.json();
+          setUnreadCount(data.count);
+        }
+      } catch {
+        // ignore
+      }
+    };
+
+    fetchUnreadCount();
+    const interval = setInterval(fetchUnreadCount, 30000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <aside className={styles.sidebar}>
@@ -29,6 +49,9 @@ export default function AdminSidebar() {
           >
             <span className={styles.icon}>{item.icon}</span>
             {item.label}
+            {item.href === '/admin/contacts' && unreadCount > 0 && (
+              <span className={styles.unreadDot} />
+            )}
           </Link>
         ))}
       </nav>
