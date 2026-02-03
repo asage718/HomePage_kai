@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import Image from 'next/image';
 import styles from './HeroSlideshow.module.css';
 
@@ -23,9 +23,17 @@ const defaultSlides: Slide[] = [
 ];
 
 export default function HeroSlideshow({ slides }: HeroSlideshowProps) {
-  const activeSlides = slides && slides.length > 0 ? slides : defaultSlides;
+  const activeSlides = useMemo(
+    () => (slides && slides.length > 0 ? slides : defaultSlides),
+    [slides]
+  );
   const [current, setCurrent] = useState(0);
   const [previous, setPrevious] = useState(0);
+  const slidesLengthRef = useRef(activeSlides.length);
+
+  useEffect(() => {
+    slidesLengthRef.current = activeSlides.length;
+  }, [activeSlides.length]);
 
   const goTo = useCallback((index: number) => {
     setCurrent((prev) => {
@@ -35,12 +43,18 @@ export default function HeroSlideshow({ slides }: HeroSlideshowProps) {
   }, []);
 
   const next = useCallback(() => {
-    goTo((current + 1) % activeSlides.length);
-  }, [current, goTo, activeSlides.length]);
+    setCurrent((prev) => {
+      setPrevious(prev);
+      return (prev + 1) % slidesLengthRef.current;
+    });
+  }, []);
 
-  const prev = useCallback(() => {
-    goTo((current - 1 + activeSlides.length) % activeSlides.length);
-  }, [current, goTo, activeSlides.length]);
+  const handlePrev = useCallback(() => {
+    setCurrent((prev) => {
+      setPrevious(prev);
+      return (prev - 1 + slidesLengthRef.current) % slidesLengthRef.current;
+    });
+  }, []);
 
   useEffect(() => {
     const timer = setInterval(next, INTERVAL);
@@ -52,7 +66,7 @@ export default function HeroSlideshow({ slides }: HeroSlideshowProps) {
       <div className={styles.row}>
         <button
           className={styles.arrow}
-          onClick={prev}
+          onClick={handlePrev}
           aria-label="前の画像"
         >
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -75,6 +89,7 @@ export default function HeroSlideshow({ slides }: HeroSlideshowProps) {
                   sizes="(max-width: 768px) 90vw, 420px"
                   quality={75}
                   priority={i === 0}
+                  loading={i === 0 ? 'eager' : 'lazy'}
                 />
               </div>
             ))}

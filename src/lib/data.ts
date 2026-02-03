@@ -3,6 +3,14 @@ import type { Work, Slide } from './types';
 
 export async function getWorks(): Promise<Work[]> {
   const rows = await prisma.work.findMany({
+    select: {
+      id: true,
+      title: true,
+      description: true,
+      category: true,
+      image: true,
+      date: true,
+    },
     orderBy: { createdAt: 'desc' },
   });
   return rows.map((r) => ({
@@ -16,11 +24,8 @@ export async function getWorks(): Promise<Work[]> {
 }
 
 export async function getSlideshow(): Promise<Slide[]> {
-  const rows = await prisma.slide.findMany({
+  return prisma.slide.findMany({
+    select: { src: true, alt: true },
     orderBy: { position: 'asc' },
   });
-  return rows.map((r) => ({
-    src: r.src,
-    alt: r.alt,
-  }));
 }

@@ -5,7 +5,7 @@ import HeroSlideshow from '@/components/HeroSlideshow/HeroSlideshow';
 import { getWorks, getSlideshow } from '@/lib/data';
 import styles from './page.module.css';
 
-export const dynamic = 'force-dynamic';
+export const revalidate = 60; // ISR: 1分
 
 export default async function HomePage() {
   let works: Awaited<ReturnType<typeof getWorks>> = [];

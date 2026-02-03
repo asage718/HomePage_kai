@@ -1,11 +1,16 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
+import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import { Work, WorkCategory } from '@/lib/types';
 import { WORK_CATEGORIES } from '@/lib/constants';
-import Lightbox from './Lightbox';
 import styles from './Gallery.module.css';
+
+const Lightbox = dynamic(() => import('./Lightbox'), {
+  ssr: false,
+  loading: () => null,
+});
 
 interface GalleryProps {
   works: Work[];
@@ -16,10 +21,13 @@ export default function Gallery({ works, showFilter = true }: GalleryProps) {
   const [activeCategory, setActiveCategory] = useState<WorkCategory | 'all'>('all');
   const [selectedWork, setSelectedWork] = useState<Work | null>(null);
 
-  const filteredWorks =
-    activeCategory === 'all'
-      ? works
-      : works.filter((w) => w.category === activeCategory);
+  const filteredWorks = useMemo(
+    () =>
+      activeCategory === 'all'
+        ? works
+        : works.filter((w) => w.category === activeCategory),
+    [works, activeCategory]
+  );
 
   return (
     <>

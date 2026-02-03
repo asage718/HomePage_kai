@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { prisma } from '@/lib/prisma';
 import styles from './page.module.css';
 
-export const dynamic = 'force-dynamic';
+export const revalidate = 3600; // ISR: 1時間
 
 export const metadata: Metadata = {
   title: 'About | aoimachi',
@@ -11,10 +11,12 @@ export const metadata: Metadata = {
 };
 
 async function getProfileData() {
-  const profile = await prisma.profile.findFirst();
-  const careers = await prisma.career.findMany({
-    orderBy: { position: 'asc' },
-  });
+  const [profile, careers] = await Promise.all([
+    prisma.profile.findFirst(),
+    prisma.career.findMany({
+      orderBy: { position: 'asc' },
+    }),
+  ]);
 
   return {
     profile: profile || {

@@ -1,11 +1,18 @@
 import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
-
-export const dynamic = 'force-dynamic';
+import { errorResponse } from '@/lib/api-utils';
 
 export async function GET() {
-  const images = await prisma.image.findMany({
-    orderBy: { createdAt: 'desc' },
-  });
-  return NextResponse.json(images);
+  try {
+    const images = await prisma.image.findMany({
+      select: { id: true, url: true, filename: true },
+      orderBy: { createdAt: 'desc' },
+    });
+
+    const response = NextResponse.json(images);
+    response.headers.set('Cache-Control', 'public, s-maxage=60, stale-while-revalidate=300');
+    return response;
+  } catch {
+    return errorResponse('取得に失敗しました');
+  }
 }

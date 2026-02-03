@@ -1,5 +1,5 @@
-import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
+import { successResponse, errorResponse } from '@/lib/api-utils';
 
 export async function GET(
   _request: Request,
@@ -8,46 +8,50 @@ export async function GET(
   const work = await prisma.work.findUnique({ where: { id: params.id } });
 
   if (!work) {
-    return NextResponse.json({ error: 'Not found' }, { status: 404 });
+    return errorResponse('Not found', 404);
   }
 
-  return NextResponse.json(work);
+  return successResponse(work);
 }
 
 export async function PUT(
   request: Request,
   { params }: { params: { id: string } }
 ) {
-  const body = await request.json();
+  try {
+    const body = await request.json();
 
-  const existing = await prisma.work.findUnique({ where: { id: params.id } });
-  if (!existing) {
-    return NextResponse.json({ error: 'Not found' }, { status: 404 });
+    const updated = await prisma.work.update({
+      where: { id: params.id },
+      data: {
+        title: body.title,
+        description: body.description,
+        category: body.category,
+        image: body.image,
+        date: body.date,
+      },
+    });
+
+    return successResponse(updated);
+  } catch (error) {
+    if ((error as { code?: string }).code === 'P2025') {
+      return errorResponse('Not found', 404);
+    }
+    return errorResponse('更新に失敗しました');
   }
-
-  const updated = await prisma.work.update({
-    where: { id: params.id },
-    data: {
-      title: body.title ?? existing.title,
-      description: body.description ?? existing.description,
-      category: body.category ?? existing.category,
-      image: body.image ?? existing.image,
-      date: body.date ?? existing.date,
-    },
-  });
-
-  return NextResponse.json(updated);
 }
 
 export async function DELETE(
   _request: Request,
   { params }: { params: { id: string } }
 ) {
-  const existing = await prisma.work.findUnique({ where: { id: params.id } });
-  if (!existing) {
-    return NextResponse.json({ error: 'Not found' }, { status: 404 });
+  try {
+    await prisma.work.delete({ where: { id: params.id } });
+    return successResponse({ success: true });
+  } catch (error) {
+    if ((error as { code?: string }).code === 'P2025') {
+      return errorResponse('Not found', 404);
+    }
+    return errorResponse('削除に失敗しました');
   }
-
-  await prisma.work.delete({ where: { id: params.id } });
-  return NextResponse.json({ success: true });
 }

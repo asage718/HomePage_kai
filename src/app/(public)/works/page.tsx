@@ -3,7 +3,7 @@ import Gallery from '@/components/Gallery/Gallery';
 import { getWorks } from '@/lib/data';
 import styles from './page.module.css';
 
-export const dynamic = 'force-dynamic';
+export const revalidate = 60; // ISR: 1分
 
 export const metadata: Metadata = {
   title: 'Works | aoimachi',
