@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState, useRef } from 'react';
+import { UNREAD_CHECK_INTERVAL } from '@/lib/constants';
 import styles from './AdminSidebar.module.css';
 
 const navItems = [
@@ -33,7 +34,7 @@ export default function AdminSidebar() {
     };
 
     fetchUnreadCount();
-    const interval = setInterval(fetchUnreadCount, 30000);
+    const interval = setInterval(fetchUnreadCount, UNREAD_CHECK_INTERVAL);
     return () => clearInterval(interval);
   }, []);
 

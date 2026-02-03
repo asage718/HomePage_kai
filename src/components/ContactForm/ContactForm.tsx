@@ -1,6 +1,8 @@
 'use client';
 
 import { useState, FormEvent } from 'react';
+import { validateContactForm, type ContactFormErrors } from '@/lib/validators';
+import { SERVICE_TYPES } from '@/lib/constants';
 import styles from './ContactForm.module.css';
 
 interface FormData {
@@ -10,13 +12,6 @@ interface FormData {
   message: string;
 }
 
-interface FormErrors {
-  name?: string;
-  email?: string;
-  subject?: string;
-  message?: string;
-}
-
 export default function ContactForm() {
   const [formData, setFormData] = useState<FormData>({
     name: '',
@@ -24,33 +19,14 @@ export default function ContactForm() {
     subject: '',
     message: '',
   });
-  const [errors, setErrors] = useState<FormErrors>({});
+  const [errors, setErrors] = useState<ContactFormErrors>({});
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [apiError, setApiError] = useState<string | null>(null);
 
-  const validate = (): FormErrors => {
-    const newErrors: FormErrors = {};
-    if (!formData.name.trim()) {
-      newErrors.name = 'お名前を入力してください';
-    }
-    if (!formData.email.trim()) {
-      newErrors.email = 'メールアドレスを入力してください';
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = '正しいメールアドレスを入力してください';
-    }
-    if (!formData.subject.trim()) {
-      newErrors.subject = '依頼内容を入力してください';
-    }
-    if (!formData.message.trim()) {
-      newErrors.message = 'メッセージを入力してください';
-    }
-    return newErrors;
-  };
-
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    const newErrors = validate();
+    const newErrors = validateContactForm(formData);
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
       return;
@@ -89,7 +65,7 @@ export default function ContactForm() {
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
-    if (errors[name as keyof FormErrors]) {
+    if (errors[name as keyof ContactFormErrors]) {
       setErrors((prev) => ({ ...prev, [name]: undefined }));
     }
   };
@@ -157,11 +133,11 @@ export default function ContactForm() {
           className={`${styles.input} ${styles.select} ${errors.subject ? styles.inputError : ''}`}
         >
           <option value="">選択してください</option>
-          <option value="イラスト制作">イラスト制作</option>
-          <option value="キャラクターデザイン">キャラクターデザイン</option>
-          <option value="ロゴデザイン">ロゴデザイン</option>
-          <option value="漫画制作">漫画制作</option>
-          <option value="その他">その他</option>
+          {SERVICE_TYPES.map((type) => (
+            <option key={type} value={type}>
+              {type}
+            </option>
+          ))}
         </select>
         {errors.subject && <p className={styles.error}>{errors.subject}</p>}
       </div>

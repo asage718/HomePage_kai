@@ -2,32 +2,9 @@
 
 import { useState, useEffect, useCallback, useRef } from 'react';
 import DashboardShell from '../components/DashboardShell';
+import type { Contact, ContactStatus } from '@/lib/types';
+import { CONTACT_STATUS_LABELS, CONTACT_FILTER_TABS, DEBOUNCE_DELAY } from '@/lib/constants';
 import styles from './contacts.module.css';
-
-type Status = 'unread' | 'in_progress' | 'done';
-
-interface Contact {
-  id: number;
-  name: string;
-  email: string;
-  subject: string;
-  message: string;
-  status: Status;
-  createdAt: string;
-}
-
-const STATUS_LABELS: Record<Status, string> = {
-  unread: '未対応',
-  in_progress: '対応中',
-  done: '完了',
-};
-
-const FILTER_TABS: { value: string; label: string }[] = [
-  { value: '', label: '全て' },
-  { value: 'unread', label: '未対応' },
-  { value: 'in_progress', label: '対応中' },
-  { value: 'done', label: '完了' },
-];
 
 export default function AdminContactsPage() {
   const [contacts, setContacts] = useState<Contact[]>([]);
@@ -60,13 +37,13 @@ export default function AdminContactsPage() {
     if (debounceRef.current) clearTimeout(debounceRef.current);
     debounceRef.current = setTimeout(() => {
       fetchContacts(searchQuery, statusFilter);
-    }, 300);
+    }, DEBOUNCE_DELAY);
     return () => {
       if (debounceRef.current) clearTimeout(debounceRef.current);
     };
   }, [searchQuery, statusFilter, fetchContacts, loading]);
 
-  const updateStatus = async (id: number, status: Status) => {
+  const updateStatus = async (id: number, status: ContactStatus) => {
     const res = await fetch('/api/contacts', {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
@@ -74,9 +51,7 @@ export default function AdminContactsPage() {
     });
     if (res.ok) {
       const updated: Contact = await res.json();
-      setContacts((prev) =>
-        prev.map((c) => (c.id === id ? updated : c))
-      );
+      setContacts((prev) => prev.map((c) => (c.id === id ? updated : c)));
       if (selected?.id === id) {
         setSelected(updated);
       }
@@ -90,7 +65,7 @@ export default function AdminContactsPage() {
     }
   };
 
-  const handleStatusChange = async (status: Status) => {
+  const handleStatusChange = async (status: ContactStatus) => {
     if (!selected) return;
     await updateStatus(selected.id, status);
   };
@@ -126,7 +101,7 @@ export default function AdminContactsPage() {
       </div>
 
       <div className={styles.filterTabs}>
-        {FILTER_TABS.map((tab) => (
+        {CONTACT_FILTER_TABS.map((tab) => (
           <button
             key={tab.value}
             className={`${styles.filterTab} ${statusFilter === tab.value ? styles.filterTabActive : ''}`}
@@ -159,7 +134,7 @@ export default function AdminContactsPage() {
             >
               <div className={styles.colStatus}>
                 <span className={`${styles.statusBadge} ${styles[`status_${contact.status}`]}`}>
-                  {STATUS_LABELS[contact.status]}
+                  {CONTACT_STATUS_LABELS[contact.status]}
                 </span>
               </div>
               <div className={styles.colName}>
@@ -178,10 +153,7 @@ export default function AdminContactsPage() {
           <div className={styles.detail} onClick={(e) => e.stopPropagation()}>
             <div className={styles.detailHeader}>
               <h2 className={styles.detailTitle}>お問い合わせ詳細</h2>
-              <button
-                className={styles.closeBtn}
-                onClick={() => setSelected(null)}
-              >
+              <button className={styles.closeBtn} onClick={() => setSelected(null)}>
                 &times;
               </button>
             </div>
@@ -191,11 +163,11 @@ export default function AdminContactsPage() {
                 <select
                   className={styles.statusSelect}
                   value={selected.status}
-                  onChange={(e) => handleStatusChange(e.target.value as Status)}
+                  onChange={(e) => handleStatusChange(e.target.value as ContactStatus)}
                 >
-                  <option value="unread">未対応</option>
-                  <option value="in_progress">対応中</option>
-                  <option value="done">完了</option>
+                  <option value="unread">{CONTACT_STATUS_LABELS.unread}</option>
+                  <option value="in_progress">{CONTACT_STATUS_LABELS.in_progress}</option>
+                  <option value="done">{CONTACT_STATUS_LABELS.done}</option>
                 </select>
               </div>
               <div className={styles.detailField}>

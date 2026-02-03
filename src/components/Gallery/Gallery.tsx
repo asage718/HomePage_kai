@@ -2,7 +2,8 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
-import { Work, WorkCategory, categories } from '@/lib/types';
+import { Work, WorkCategory } from '@/lib/types';
+import { WORK_CATEGORIES } from '@/lib/constants';
 import Lightbox from './Lightbox';
 import styles from './Gallery.module.css';
 
@@ -30,7 +31,7 @@ export default function Gallery({ works, showFilter = true }: GalleryProps) {
           >
             All
           </button>
-          {categories.map((cat) => (
+          {WORK_CATEGORIES.map((cat) => (
             <button
               key={cat}
               className={`${styles.filterBtn} ${activeCategory === cat ? styles.filterActive : ''}`}

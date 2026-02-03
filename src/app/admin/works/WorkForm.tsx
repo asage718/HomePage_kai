@@ -3,8 +3,8 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import ImageUploader from '../components/ImageUploader';
-import { categories } from '@/lib/types';
 import type { Work, WorkCategory } from '@/lib/types';
+import { WORK_CATEGORIES } from '@/lib/constants';
 import styles from './WorkForm.module.css';
 
 interface WorkFormProps {
@@ -89,7 +89,7 @@ export default function WorkForm({ work }: WorkFormProps) {
                 onChange={(e) => setCategory(e.target.value as WorkCategory)}
                 className={styles.select}
               >
-                {categories.map((cat) => (
+                {WORK_CATEGORIES.map((cat) => (
                   <option key={cat} value={cat}>
                     {cat}
                   </option>

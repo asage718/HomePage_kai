@@ -1,7 +1,9 @@
-import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
+import { isValidContactStatus } from '@/lib/validators';
+import { successResponse, errorResponse } from '@/lib/api-utils';
+import { ERROR_MESSAGES } from '@/lib/api-utils';
 
-const VALID_STATUSES = ['unread', 'in_progress', 'done'] as const;
+export const dynamic = 'force-dynamic';
 
 export async function GET(request: Request) {
   try {
@@ -20,7 +22,7 @@ export async function GET(request: Request) {
       ];
     }
 
-    if (status && VALID_STATUSES.includes(status as typeof VALID_STATUSES[number])) {
+    if (status && isValidContactStatus(status)) {
       where.status = status;
     }
 
@@ -28,9 +30,10 @@ export async function GET(request: Request) {
       where,
       orderBy: { createdAt: 'desc' },
     });
-    return NextResponse.json(contacts);
+
+    return successResponse(contacts);
   } catch {
-    return NextResponse.json({ error: '取得に失敗しました' }, { status: 500 });
+    return errorResponse(ERROR_MESSAGES.CONTACT_FETCH_ERROR);
   }
 }
 
@@ -40,11 +43,11 @@ export async function PATCH(request: Request) {
     const { id, status } = body;
 
     if (typeof id !== 'number') {
-      return NextResponse.json({ error: '無効なリクエストです' }, { status: 400 });
+      return errorResponse(ERROR_MESSAGES.INVALID_REQUEST, 400);
     }
 
-    if (typeof status !== 'string' || !VALID_STATUSES.includes(status as typeof VALID_STATUSES[number])) {
-      return NextResponse.json({ error: '無効なステータスです' }, { status: 400 });
+    if (!isValidContactStatus(status)) {
+      return errorResponse(ERROR_MESSAGES.INVALID_STATUS, 400);
     }
 
     const contact = await prisma.contact.update({
@@ -52,8 +55,8 @@ export async function PATCH(request: Request) {
       data: { status },
     });
 
-    return NextResponse.json(contact);
+    return successResponse(contact);
   } catch {
-    return NextResponse.json({ error: '更新に失敗しました' }, { status: 500 });
+    return errorResponse(ERROR_MESSAGES.CONTACT_UPDATE_ERROR);
   }
 }
