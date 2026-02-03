@@ -9,16 +9,21 @@ interface Slide {
   alt: string;
 }
 
-const slides: Slide[] = [
+const INTERVAL = 4000;
+
+interface HeroSlideshowProps {
+  slides?: Slide[];
+}
+
+const defaultSlides: Slide[] = [
   { src: '/images/works/sample1.jpg', alt: 'sample1' },
   { src: '/images/works/syokanokaze.jpg', alt: '初夏の風' },
   { src: '/images/works/illust50.jpg', alt: 'illust50' },
   { src: '/images/works/illust43.jpg', alt: 'illust43' },
 ];
 
-const INTERVAL = 4000;
-
-export default function HeroSlideshow() {
+export default function HeroSlideshow({ slides }: HeroSlideshowProps) {
+  const activeSlides = slides && slides.length > 0 ? slides : defaultSlides;
   const [current, setCurrent] = useState(0);
   const [previous, setPrevious] = useState(0);
 
@@ -30,12 +35,12 @@ export default function HeroSlideshow() {
   }, []);
 
   const next = useCallback(() => {
-    goTo((current + 1) % slides.length);
-  }, [current, goTo]);
+    goTo((current + 1) % activeSlides.length);
+  }, [current, goTo, activeSlides.length]);
 
   const prev = useCallback(() => {
-    goTo((current - 1 + slides.length) % slides.length);
-  }, [current, goTo]);
+    goTo((current - 1 + activeSlides.length) % activeSlides.length);
+  }, [current, goTo, activeSlides.length]);
 
   useEffect(() => {
     const timer = setInterval(next, INTERVAL);
@@ -57,7 +62,7 @@ export default function HeroSlideshow() {
 
         <div className={styles.slideshow}>
           <div className={styles.track}>
-            {slides.map((slide, i) => (
+            {activeSlides.map((slide, i) => (
               <div
                 key={i}
                 className={`${styles.slide} ${i === current ? styles.active : ''} ${i === previous ? styles.prev : ''}`}
@@ -67,7 +72,8 @@ export default function HeroSlideshow() {
                   alt={slide.alt}
                   fill
                   className={styles.image}
-                  sizes="(max-width: 768px) 100vw, 420px"
+                  sizes="(max-width: 768px) 90vw, 420px"
+                  quality={75}
                   priority={i === 0}
                 />
               </div>
@@ -87,7 +93,7 @@ export default function HeroSlideshow() {
       </div>
 
       <div className={styles.dots}>
-        {slides.map((_, i) => (
+        {activeSlides.map((_, i) => (
           <button
             key={i}
             className={`${styles.dot} ${i === current ? styles.dotActive : ''}`}

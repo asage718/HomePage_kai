@@ -67,13 +67,13 @@
 }
 
 .imageWrap {
+  position: relative;
   width: 100%;
+  aspect-ratio: 1;
   background-color: var(--color-bg-secondary);
 }
 
 .image {
-  width: 100%;
-  height: auto;
   object-fit: contain;
 }
 

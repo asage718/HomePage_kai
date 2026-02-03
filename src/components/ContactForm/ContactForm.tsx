@@ -26,6 +26,8 @@ export default function ContactForm() {
   });
   const [errors, setErrors] = useState<FormErrors>({});
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [apiError, setApiError] = useState<string | null>(null);
 
   const validate = (): FormErrors => {
     const newErrors: FormErrors = {};
@@ -46,7 +48,7 @@ export default function ContactForm() {
     return newErrors;
   };
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     const newErrors = validate();
     if (Object.keys(newErrors).length > 0) {
@@ -54,9 +56,32 @@ export default function ContactForm() {
       return;
     }
     setErrors({});
-    // In production, send to API route or external service
-    console.log('Form submitted:', formData);
-    setSubmitted(true);
+    setApiError(null);
+    setSubmitting(true);
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+
+      if (!res.ok) {
+        const data = await res.json();
+        if (data.errors) {
+          setErrors(data.errors);
+        } else {
+          setApiError(data.error || '送信に失敗しました');
+        }
+        return;
+      }
+
+      setSubmitted(true);
+    } catch {
+      setApiError('通信エラーが発生しました。もう一度お試しください。');
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const handleChange = (
@@ -157,8 +182,10 @@ export default function ContactForm() {
         {errors.message && <p className={styles.error}>{errors.message}</p>}
       </div>
 
-      <button type="submit" className={styles.submit}>
-        送信する
+      {apiError && <p className={styles.error}>{apiError}</p>}
+
+      <button type="submit" className={styles.submit} disabled={submitting}>
+        {submitting ? '送信中...' : '送信する'}
       </button>
     </form>
   );

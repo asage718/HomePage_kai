@@ -2,7 +2,7 @@
 
 import { useEffect, useCallback } from 'react';
 import Image from 'next/image';
-import { Work } from '@/data/works';
+import { Work } from '@/lib/types';
 import styles from './Lightbox.module.css';
 
 interface LightboxProps {
@@ -40,8 +40,10 @@ export default function Lightbox({ work, onClose }: LightboxProps) {
           <Image
             src={work.image}
             alt={work.title}
-            width={800}
-            height={800}
+            fill
+            sizes="(max-width: 768px) 95vw, 720px"
+            quality={80}
+            priority
             className={styles.image}
           />
         </div>

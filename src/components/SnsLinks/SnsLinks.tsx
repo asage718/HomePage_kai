@@ -9,7 +9,7 @@ export default function SnsLinks({ size = 'medium' }: SnsLinksProps) {
     <ul className={`${styles.list} ${styles[size]}`}>
       <li>
         <a
-          href="https://twitter.com/"
+          href="https://x.com/aoi_machi012"
           target="_blank"
           rel="noopener noreferrer"
           className={styles.link}
@@ -22,20 +22,7 @@ export default function SnsLinks({ size = 'medium' }: SnsLinksProps) {
       </li>
       <li>
         <a
-          href="https://www.pixiv.net/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className={styles.link}
-          aria-label="Pixiv"
-        >
-          <svg viewBox="0 0 24 24" fill="currentColor" className={styles.icon}>
-            <path d="M4.935 0A4.924 4.924 0 0 0 0 4.935v14.13A4.924 4.924 0 0 0 4.935 24h14.13A4.924 4.924 0 0 0 24 19.065V4.935A4.924 4.924 0 0 0 19.065 0zm7.81 4.547c2.181 0 4.058.676 5.399 1.847a6.118 6.118 0 0 1 2.116 4.66c.005 1.854-.88 3.476-2.257 4.563-1.375 1.092-3.225 1.697-5.258 1.697-2.314 0-4.46-.842-4.46-.842v2.718c0 .474-.386.86-.86.86h-1.61a.86.86 0 0 1-.86-.86V6.267c0-.475.385-.86.86-.86h1.61c.474 0 .86.385.86.86v.158s2.145-.878 4.46-.878zm-.05 1.89c-1.66 0-3.408.728-3.408.728v7.142s1.752.692 3.408.692c1.39 0 2.783-.46 3.692-1.324.863-.82 1.392-1.924 1.392-3.28 0-1.313-.517-2.474-1.392-3.333-.91-.89-2.302-1.625-3.692-1.625z" />
-          </svg>
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://www.instagram.com/"
+          href="https://www.instagram.com/aoi_machi012/"
           target="_blank"
           rel="noopener noreferrer"
           className={styles.link}

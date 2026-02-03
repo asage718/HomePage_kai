@@ -16,7 +16,26 @@
       "Bash(taskkill //F //PID 15516)",
       "Bash(taskkill //F //PID 10964)",
       "Bash(taskkill //F //PID 5828)",
-      "Bash(taskkill:*)"
+      "Bash(taskkill:*)",
+      "Bash(git commit:*)",
+      "Bash(git pull:*)",
+      "Bash(git stash:*)",
+      "Bash(git -C \"C:\\\\Users\\\\USER\\\\OneDrive\\\\デスクトップ\\\\HP\" log --oneline -20)",
+      "Bash(npm install:*)",
+      "Bash(node:*)",
+      "Bash(ls:*)",
+      "Bash(npx next build)",
+      "Bash(if not exist \"C:\\\\Users\\\\USER\\\\OneDrive\\\\デスクトップ\\\\HP\\\\prisma\" mkdir \"C:\\\\Users\\\\USER\\\\OneDrive\\\\デスクトップ\\\\HP\\\\prisma\")",
+      "Bash(npx prisma generate)",
+      "WebSearch",
+      "Bash(npx prisma db push:*)",
+      "Bash(npx prisma:*)",
+      "Bash(npm uninstall:*)",
+      "Bash(cmd /c \"taskkill /PID 15980 /F\")",
+      "Bash(powershell:*)",
+      "Bash(find:*)",
+      "Bash(cmd /c \"taskkill /PID 4664 /F\")",
+      "Bash(cmd //c \"taskkill //PID 4664 //F\")"
     ]
   }
 }

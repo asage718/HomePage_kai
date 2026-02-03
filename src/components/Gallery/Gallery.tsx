@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
-import { Work, WorkCategory, categories } from '@/data/works';
+import { Work, WorkCategory, categories } from '@/lib/types';
 import Lightbox from './Lightbox';
 import styles from './Gallery.module.css';
 
@@ -52,8 +52,9 @@ export default function Gallery({ works, showFilter = true }: GalleryProps) {
               <Image
                 src={work.image}
                 alt={work.title}
-                width={400}
-                height={400}
+                fill
+                sizes="(max-width: 480px) 45vw, (max-width: 1024px) 45vw, 30vw"
+                quality={70}
                 className={styles.image}
               />
             </div>

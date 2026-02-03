@@ -53,6 +53,7 @@
 }
 
 .imageWrap {
+  position: relative;
   aspect-ratio: 1;
   overflow: hidden;
   background-color: var(--color-bg-secondary);
