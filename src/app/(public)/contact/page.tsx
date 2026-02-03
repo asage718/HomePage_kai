@@ -21,6 +21,8 @@ export default function ContactPage() {
           内容を確認の上、3営業日以内にご返信いたします。
         </p>
 
+        <ContactForm />
+
         <div className={styles.worksLink}>
           <p className={styles.worksLinkText}>ご依頼前に作品をご覧になりたい方はこちら</p>
           <Link href="/works" className={styles.worksLinkButton}>
@@ -31,8 +33,6 @@ export default function ContactPage() {
             </svg>
           </Link>
         </div>
-
-        <ContactForm />
       </div>
     </section>
   );
