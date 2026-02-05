@@ -35,14 +35,6 @@ export default async function HomePage() {
             <p className={styles.heroDescription}>
               イラスト・キャラクターデザイン・漫画制作を手がけるaoimachiのポートフォリオサイトです。
             </p>
-            <div className={styles.heroActions}>
-              <Link href="/works" className={styles.heroBtn}>
-                View Works
-              </Link>
-              <Link href="/contact" className={styles.heroBtnOutline}>
-                Contact
-              </Link>
-            </div>
             <div className={styles.heroSns}>
               <SnsLinks />
             </div>
@@ -85,6 +77,20 @@ export default async function HomePage() {
                 <line x1="5" y1="12" x2="19" y2="12" />
                 <polyline points="12 5 19 12 12 19" />
               </svg>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className={styles.ctaSection}>
+        <div className={styles.container}>
+          <div className={styles.ctaActions}>
+            <Link href="/works" className={styles.heroBtn}>
+              View Works
+            </Link>
+            <Link href="/contact" className={styles.heroBtnOutline}>
+              Contact
             </Link>
           </div>
         </div>

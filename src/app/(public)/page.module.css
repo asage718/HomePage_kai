@@ -204,6 +204,17 @@
   height: 18px;
 }
 
+/* CTA Section */
+.ctaSection {
+  padding: 64px 0;
+}
+
+.ctaActions {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+
 /* Responsive */
 @media (max-width: 1024px) {
   .worksGrid {
@@ -269,15 +280,17 @@
     margin-bottom: 24px;
   }
 
-  .heroActions {
+  .ctaActions {
     flex-direction: column;
-    margin-bottom: 24px;
+    align-items: center;
   }
 
   .heroBtn,
   .heroBtnOutline {
     justify-content: center;
     padding: 10px 20px;
+    width: 100%;
+    max-width: 280px;
   }
 
   .worksGrid {
