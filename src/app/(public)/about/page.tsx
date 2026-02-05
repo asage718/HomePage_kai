@@ -1,13 +1,19 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import { prisma } from '@/lib/prisma';
+import { PersonJsonLd, BreadcrumbJsonLd } from '@/components/JsonLd/JsonLd';
+import { siteConfig } from '@/lib/seo-config';
 import styles from './page.module.css';
 
 export const revalidate = 3600; // ISR: 1時間
 
 export const metadata: Metadata = {
-  title: 'About | aoimachi',
-  description: 'イラストレーターのプロフィール・経歴を紹介しています。',
+  title: 'About',
+  description: 'イラストレーター・キャラクターデザイナーaoimachiのプロフィール・経歴・実績を紹介しています。',
+  openGraph: {
+    title: 'About | aoimachi',
+    description: 'イラストレーター・キャラクターデザイナーaoimachiのプロフィール・経歴・実績を紹介しています。',
+  },
 };
 
 async function getProfileData() {
@@ -36,6 +42,18 @@ export default async function AboutPage() {
 
   return (
     <section className={styles.section}>
+      <PersonJsonLd
+        name={profile.name}
+        jobTitle={profile.role}
+        description={profile.bio}
+        image={profile.image}
+      />
+      <BreadcrumbJsonLd
+        items={[
+          { name: 'ホーム', url: siteConfig.url },
+          { name: 'About', url: `${siteConfig.url}/about` },
+        ]}
+      />
       <div className={styles.container}>
         <div className={styles.header}>
           <h1 className={styles.title}>About</h1>

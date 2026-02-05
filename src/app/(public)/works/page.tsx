@@ -1,13 +1,19 @@
 import type { Metadata } from 'next';
 import Gallery from '@/components/Gallery/Gallery';
+import { BreadcrumbJsonLd } from '@/components/JsonLd/JsonLd';
+import { siteConfig } from '@/lib/seo-config';
 import { getWorks } from '@/lib/data';
 import styles from './page.module.css';
 
 export const revalidate = 60; // ISR: 1分
 
 export const metadata: Metadata = {
-  title: 'Works | aoimachi',
-  description: '作品一覧ページです。イラスト・キャラクターデザイン・漫画・ロゴなどの作品を掲載しています。',
+  title: 'Works',
+  description: 'aoimachiの作品一覧。イラスト・キャラクターデザインなどのポートフォリオ作品を掲載しています。',
+  openGraph: {
+    title: 'Works | aoimachi',
+    description: 'aoimachiの作品一覧。イラスト・キャラクターデザインなどのポートフォリオ作品を掲載しています。',
+  },
 };
 
 export default async function WorksPage() {
@@ -15,6 +21,12 @@ export default async function WorksPage() {
 
   return (
     <section className={styles.section}>
+      <BreadcrumbJsonLd
+        items={[
+          { name: 'ホーム', url: siteConfig.url },
+          { name: 'Works', url: `${siteConfig.url}/works` },
+        ]}
+      />
       <div className={styles.container}>
         <div className={styles.header}>
           <h1 className={styles.title}>Works</h1>

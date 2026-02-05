@@ -1,16 +1,28 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import ContactForm from '@/components/ContactForm/ContactForm';
+import { BreadcrumbJsonLd } from '@/components/JsonLd/JsonLd';
+import { siteConfig } from '@/lib/seo-config';
 import styles from './page.module.css';
 
 export const metadata: Metadata = {
-  title: 'Contact | aoimachi',
-  description: 'お仕事のご依頼・ご相談はこちらからお問い合わせください。',
+  title: 'Contact',
+  description: 'イラスト・キャラクターデザインのお仕事のご依頼・ご相談はこちらからお問い合わせください。',
+  openGraph: {
+    title: 'Contact | aoimachi',
+    description: 'イラスト・キャラクターデザインのお仕事のご依頼・ご相談はこちらからお問い合わせください。',
+  },
 };
 
 export default function ContactPage() {
   return (
     <section className={styles.section}>
+      <BreadcrumbJsonLd
+        items={[
+          { name: 'ホーム', url: siteConfig.url },
+          { name: 'Contact', url: `${siteConfig.url}/contact` },
+        ]}
+      />
       <div className={styles.container}>
         <div className={styles.header}>
           <h1 className={styles.title}>Contact</h1>

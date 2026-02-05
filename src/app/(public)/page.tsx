@@ -2,6 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import SnsLinks from '@/components/SnsLinks/SnsLinks';
 import HeroSlideshow from '@/components/HeroSlideshow/HeroSlideshow';
+import { WebsiteJsonLd, PersonJsonLd } from '@/components/JsonLd/JsonLd';
 import { getWorks, getSlideshow } from '@/lib/data';
 import styles from './page.module.css';
 
@@ -21,6 +22,9 @@ export default async function HomePage() {
 
   return (
     <>
+      <WebsiteJsonLd />
+      <PersonJsonLd />
+
       {/* Hero Section */}
       <section className={styles.hero}>
         <div className={styles.heroInner}>
