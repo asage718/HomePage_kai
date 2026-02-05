@@ -14,7 +14,7 @@ export default function AdminWorksPage() {
   useEffect(() => {
     fetch('/api/works')
       .then((res) => res.json())
-      .then((data) => setWorks(data))
+      .then((data) => { if (Array.isArray(data)) setWorks(data); })
       .finally(() => setLoading(false));
   }, []);
 

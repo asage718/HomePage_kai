@@ -33,8 +33,8 @@ export default function AdminProfilePage() {
     fetch('/api/profile')
       .then((res) => res.json())
       .then((data) => {
-        setProfile(data.profile);
-        setCareers(data.careers || []);
+        if (data.profile) setProfile(data.profile);
+        if (Array.isArray(data.careers)) setCareers(data.careers);
       })
       .finally(() => setLoading(false));
   }, []);

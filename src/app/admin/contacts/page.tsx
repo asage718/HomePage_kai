@@ -22,7 +22,7 @@ export default function AdminContactsPage() {
     try {
       const res = await fetch(url);
       const data = await res.json();
-      setContacts(data);
+      if (Array.isArray(data)) setContacts(data);
     } catch {
       // silently fail
     }

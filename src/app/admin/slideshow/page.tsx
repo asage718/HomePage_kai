@@ -21,8 +21,8 @@ export default function SlideshowPage() {
       fetch('/api/works').then((r) => r.json()),
     ])
       .then(([slidesData, worksData]) => {
-        setSlides(slidesData);
-        setWorks(worksData);
+        if (Array.isArray(slidesData)) setSlides(slidesData);
+        if (Array.isArray(worksData)) setWorks(worksData);
       })
       .finally(() => setLoading(false));
   }, []);

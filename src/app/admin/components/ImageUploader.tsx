@@ -59,7 +59,7 @@ export default function ImageUploader({ value, onChange }: ImageUploaderProps) {
       const res = await fetch('/api/images');
       if (res.ok) {
         const data = await res.json();
-        setImages(data);
+        if (Array.isArray(data)) setImages(data);
       }
     } finally {
       setLoadingImages(false);
