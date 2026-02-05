@@ -17,7 +17,12 @@ export const metadata: Metadata = {
 };
 
 export default async function WorksPage() {
-  const works = await getWorks();
+  let works: Awaited<ReturnType<typeof getWorks>> = [];
+  try {
+    works = await getWorks();
+  } catch (error) {
+    console.error('Failed to fetch works:', error);
+  }
 
   return (
     <section className={styles.section}>

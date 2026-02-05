@@ -16,23 +16,30 @@ export const metadata: Metadata = {
   },
 };
 
-async function getProfileData() {
-  const [profile, careers] = await Promise.all([
-    prisma.profile.findFirst(),
-    prisma.career.findMany({
-      orderBy: { position: 'asc' },
-    }),
-  ]);
+const defaultProfile = {
+  name: 'aoimachi',
+  role: 'Illustrator / Character Designer',
+  bio: 'イラストレーター・キャラクターデザイナーとして活動しています。',
+  image: null,
+};
 
-  return {
-    profile: profile || {
-      name: 'aoimachi',
-      role: 'Illustrator / Character Designer',
-      bio: 'イラストレーター・キャラクターデザイナーとして活動しています。',
-      image: null,
-    },
-    careers,
-  };
+async function getProfileData() {
+  try {
+    const [profile, careers] = await Promise.all([
+      prisma.profile.findFirst(),
+      prisma.career.findMany({
+        orderBy: { position: 'asc' },
+      }),
+    ]);
+
+    return {
+      profile: profile || defaultProfile,
+      careers,
+    };
+  } catch (error) {
+    console.error('Failed to fetch profile:', error);
+    return { profile: defaultProfile, careers: [] as { id: number; year: string; text: string; position: number }[] };
+  }
 }
 
 export default async function AboutPage() {
